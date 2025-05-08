@@ -1,0 +1,19 @@
+{
+    "document": {
+        "address": "http://127.0.0.1:8001"
+    },
+    "document_processor": {
+        "address": "http://127.0.0.1:8002",
+        "raw": [
+            "application/json",
+            "text/plain"
+        ],
+        "process": [
+            "application/pdf",
+            "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+        ],
+        "disallow": [
+            "application/sql"
+        ]
+    }
+}

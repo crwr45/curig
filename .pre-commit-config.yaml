@@ -1,0 +1,25 @@
+repos:
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+    -   id: check-yaml
+    -   id: end-of-file-fixer
+    -   id: trailing-whitespace
+-   repo: https://github.com/psf/black
+    rev: 26.3.1
+    hooks:
+    -   id: black
+        args:
+        -   "--line-length=100"
+        language_version: python3.14
+-   repo: https://github.com/johannsdg/pre-commit-license-headers
+    rev: v0.1.0
+    hooks:
+    -   id: check-license-headers
+        args:
+        -   "--template"
+        -   |
+            SPDX-License-Identifier: Apache-2.0
+            Copyright (c) 2026 [OWNER]
+        -   "--owner=Charlie Wheeler-Robinson"
+        files: \.py$

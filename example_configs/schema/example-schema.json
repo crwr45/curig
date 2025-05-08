@@ -1,0 +1,75 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://json-schema.curig.io/service-config.json",
+    "title": "Schema for service config.",
+    "$ref": "#services",
+    "definitions": {
+        "services": {
+            "$id": "#services",
+            "type": "object",
+            "title": "Service Config",
+            "properties": {
+                "document": {
+                    "$ref": "#document"
+                },
+                "document_processor": {
+                    "$ref": "#document_processor"
+                },
+                "additionalProperties": false
+            }
+        },
+        "document": {
+            "$id": "#document",
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "url": {
+                    "type": "string",
+                    "format": "uri"
+                }
+            },
+            "required": [
+                "url"
+            ]
+        },
+        "document_processor": {
+            "$id": "#document_processor",
+            "type": "object",
+            "title": "DocumentProcessor",
+            "additionalProperties": false,
+            "properties": {
+                "url": {
+                    "type": "string",
+                    "format": "uri"
+                },
+                "raw": {
+                    "description": "Mediatypes where the content will be extracted raw (as text)",
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "pattern": "\\w+\/[-+.\\w]+"
+                    }
+                },
+                "process": {
+                    "description": "Mediatypes where the content will be extracted using the processor service",
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "pattern": "\\w+\/[-+.\\w]+"
+                    }
+                },
+                "disallow": {
+                    "description": "Mediatypes to be rejected",
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "pattern": "\\w+\/[-+.\\w]+"
+                    }
+                }
+            },
+            "required": [
+                "url"
+            ]
+        }
+    }
+}

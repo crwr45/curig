@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "curig"
+version = "0.1.0"
+description = "Config loader with schema validation and environment variable support"
+readme = "README.md"
+license = "Apache-2.0"
+authors = [{name = "Charlie Wheeler-Robinson"}]
+requires-python = ">=3.12"
+dependencies = [
+    "python-jsonpath",
+    "jsonschema",
+    "PyYAML",
+]
+
+[project.scripts]
+curig = "curig.load:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
