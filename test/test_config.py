@@ -8,6 +8,7 @@ from unittest.mock import patch, mock_open
 import pytest
 
 from curig.config import ConfigLoader
+from curig.url import JSON_PREFIX
 
 data = {"foo": "bar"}
 mime_data = {"mimes": ["application/json", "text/plain"]}
@@ -32,7 +33,7 @@ class CaseData:
 
     @property
     def data_url(self):
-        return f"data:application/json;base64,{self.b64}"
+        return f"data:{JSON_PREFIX},{self.b64}"
 
     @property
     def file_url(self):

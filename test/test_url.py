@@ -7,11 +7,11 @@ from unittest.mock import patch, mock_open
 
 import pytest
 
-from curig.url import ConfigURL
+from curig.url import ConfigURL, JSON_PREFIX
 
 data = {"foo": "bar"}
 mime_data = {"mimes": ["application/json", "text/plain"]}
-url = f"data:application/json;base64,{urlsafe_b64encode(json.dumps(data).encode(encoding='utf-8')).decode(encoding='utf-8')}"
+url = f"data:{JSON_PREFIX},{urlsafe_b64encode(json.dumps(data).encode(encoding='utf-8')).decode(encoding='utf-8')}"
 
 
 class CaseData:
@@ -22,7 +22,7 @@ class CaseData:
         if scheme == "file":
             self.url = f"file://{fname}"
         elif scheme == "data":
-            self.url = f"data:application/json;base64,{urlsafe_b64encode(self.data.encode(encoding='utf-8')).decode(encoding='utf-8')}"
+            self.url = f"data:{JSON_PREFIX},{urlsafe_b64encode(self.data.encode(encoding='utf-8')).decode(encoding='utf-8')}"
 
 
 CASES = [

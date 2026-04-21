@@ -33,7 +33,7 @@ config = cfg.load('CONFIG_VAR_NAME')
 
 ## Recipes
 
-b64 encoded config can be generated using:
+b64 encoded config (e.g. for use as defaults) can be generated using the helper function `curig.util.build_url`, or as follows:
 
 ```
 from base64 import urlsafe_b64encode

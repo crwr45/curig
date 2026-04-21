@@ -5,6 +5,11 @@ from base64 import urlsafe_b64decode
 from typing import Tuple
 from urllib.parse import urlparse, unquote
 
+JSON_PREFIX = "application/json;base64"
+YAML_PREFIX = "application/yaml;base64"
+
+SUPPORTED_PREFIXES = [JSON_PREFIX, YAML_PREFIX]
+
 
 class ConfigURL:
     """Parse a config URL and get the data it points to.
@@ -39,7 +44,13 @@ class ConfigURL:
             case ("file", "", path, "", "", ""):
                 return "file", unquote(path)
             case ("data", "", path, "", "", ""):
-                prefix, data = path.split("application/json;base64,")
+                for supported in SUPPORTED_PREFIXES:
+                    if supported in path:
+                        prefix, data = path.split(supported)
+                        break
+                else:
+                    raise ValueError(f"unsupported prefix")
+
                 if prefix == "":
                     return "data", urlsafe_b64decode(data.encode(encoding="utf-8")).decode(
                         encoding="utf-8"
@@ -47,4 +58,4 @@ class ConfigURL:
                 else:
                     raise ValueError(f"unsupported prefix on data URL: {prefix}")
             case _:
-                raise ValueError(f"unsupported URL: {url}")
+                raise ValueError(f"unsupported URL")
